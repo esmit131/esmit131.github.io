@@ -2,6 +2,10 @@
 <html>
 <head>
     <title>Eli's Projects - Home</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -33,17 +37,72 @@
 
             <h2>What's on this site?</h2>
             <p>
-                I have my own dedicated hardware for setting up virtual machines, self-hosted cloud services, reverse proxies, and more. Each project page has a screenshot, an explanation of why I did it, what it does, and what I learned.
+                I have my own dedicated hardware for setting up virtual machines, self-hosted cloud services, reverse proxies, and more.
+                 Each project page has pictures, an explanation of why I did it, what it does, and what I learned.
+                 This site is the result of my final project for my CIS 300 course at ASU. The purpose
+                 of this is to demonstrate the HTML and CSS skills I've learned from this class. A brief list of some requirements for this site:
             </p>
+                 <ul>
+                    <li>1 Home page</li>
+                    <li>3-5 Content pages</li>
+                    <li>1 Table having at least 3 columns, 1 header row, and 3 data rows</li>
+                    <li>1 Video (specifically using the &lt;video&gt; tag)</li>
+                    <li>1 Email link</li>
+                    <li>1 External link</li>
+                    <li>1 Form with at least 4 fields</li>
+                 </ul>
+            <p>
+                <h2>Overview of projects here</h2>
+                    <div class="project-grid">
+                        <div class="project-card">
+                          <h3>Proxmox</h3>
+                          <p>A virtualization host on my own hardware for running VMs and LXC containers.
+                             The foundation that the rest of my self-hosted stack runs on.</p>
+                          <a href="proxmox.html">Learn more &rarr;</a>
+                        </div>
 
-            <h2>Overview of projects</h2>
-            <p>
-                (future table will go here)
-            </p>
+                        <div class="project-card">
+                          <h3>Nextcloud</h3>
+                          <p>Self-hosted cloud storage and collaboration - my own files, phots, and
+                             notes, fully under my control and synced across all my devices.</p>
+                          <a href="nextcloud.html">Learn more &rarr;</a>
+                        </div>
+
+                        <div class="project-card">
+                          <h3>AMP</h3>
+                          <p>A self-hosted game server control panel from CubeCoders. I set it up on my
+                                own hardware to install and manage game servers through a
+                                clean web interface, with graphical settings, file management, and scheduling
+                                - no need to stand up Docker or a separate database first.</p>
+                          <a href="amp.html">Learn more &rarr;</a>
+                        </div>
+
+                        <div class="project-card">
+                          <h3>Nginx</h3>
+                          <p>A reverse proxy that fronts my other services and handles TLS so I can
+                             reach everything over secure, friendly domain names without opening any ports
+                              on my home network.</p>
+                          <a href="nginx.html">Learn more &rarr;</a>
+                        </div>
+                    </div>
             <h2>What does my hardware look like?</h2>
-            <p>
-                (smaller table of computer hardware)
-            </p>
+            <table class="hardware-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Specification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>CPU</td>            <td>Intel Core i7-14700f</td></tr>
+                <tr><td>RAM</td>            <td>64 GB DDR5 6000 MHz</td></tr>
+                <tr><td>Storage</td>        <td>2 TB Samsung 990 EVO Plus NVMe SSD <br><br> 12 TB Western Digital HDD</td></tr>
+                <tr><td>GPU</td>            <td>NVIDIA RTX 3090</td></tr>
+                <tr><td>Power Supply</td>   <td>850W 80+ Gold</td></tr>
+                <tr><td>Network</td>        <td>1 GbE Ethernet (onboard)</td></tr>
+                <tr><td>Router</td>         <td>ASUS GT-AXE11000</td></tr>
+              </tbody>
+            </table>
         </div>
 
     </div>
