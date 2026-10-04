@@ -9,6 +9,10 @@ body {
     overflow: hidden;
 }
 
+code {
+    background-color: #222233;
+}
+
 h1, h2 {
     color: #1375cb;
 }
@@ -54,6 +58,14 @@ a {
     box-shadow: 0 6px 18px rgba(0,0,0,0.5);
 }
 #logo {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto 24px;
+}
+
+.logo {
     display: block;
     width: 100%;
     max-width: 420px;

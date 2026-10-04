@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eli's Projects - Nginx & Oracle Cloud</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html">
+            <img src="images/eli_logo.png" alt="Eli's Projects Logo">
+            <h1>Eli's Projects</h1>
+        </a>
+    </div>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-label">Projects</li>
+                <li><a href="proxmox.html">Proxmox</a></li>
+                <li><a href="nextcloud.html">Nextcloud</a></li>
+                <li><a href="amp.html">AMP</a></li>
+                <li><a href="nginx.html" class="active">Nginx</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="logo">
+                <img src="images/nginx_logo.png" class="logo" alt="Nginx logo">
+                <img src="images/oracle_cloud_logo.png" class="logo" alt="Oracle Cloud logo">
+            </div>
+
+            <div class="feature-row">
+                <div class="feature-text">
+                    <h2>Why?</h2>
+                    <p>
+                        I had all of my services — <a href="nextcloud.html">Nextcloud</a>, <a href="amp.html">AMP</a>, <a href="proxmox.html">Proxmox</a>, a Minecraft
+                        server, and more — running on my home network (or wanted to be ran).
+                        The only way to reach
+                        them from outside was to start punching holes in my home router with
+                        individual port forward rules for every single service, which meant more
+                        open ports, more attack surface, and a lot of clutter on the router.
+                        I wanted a single, clean public entry point where I could type a
+                        friendly subdomain and land on the right service over HTTPS, without
+                        my home router ever needing to expose a single port. I also wanted
+                        one place to manage TLS certificates instead of juggling them per
+                        service.
+                    </p>
+                </div>
+                <div class="feature-media">
+                    <img src="images/nginx_why.png" alt="Nginx Proxy Manager dashboard">
+                    <p>Nginx Proxy Manager Dashboard</p>
+                </div>
+            </div>
+
+            <div class="feature-row">
+                <div class="feature-media">
+                    <a href="images/nginx_hosts.png" target="_blank"><img src="images/nginx_hosts.png" alt="NPM proxy hosts overview"></a>
+                    <p>Overview of Proxy Hosts List in NPM</p>
+                    <a href="images/oracle_rules.png" target="_blank"><img src="images/oracle_rules.png" alt="Oracle ingress rules overview"></a>
+                    <p>Overview of Ingress Rules for the VNC in Oracle Cloud</p>
+                    <a href="images/cloudflare_records.png" target="_blank"><img src="images/cloudflare_records.png" alt="Cloudflare DNS records pointing subdomains to the Oracle Cloud IP"></a>
+                    <p>Cloudflare DNS A records for each service subdomain</p>
+                </div>
+                <div class="feature-text">
+                    <h2>What does it do?</h2>
+                    <p>
+                        Nginx Proxy Manager (NPM) is running as a container on my
+                        <a href="proxmox.html">Proxmox server</a> at home. It is the reverse proxy for everything —
+                        <a href="nextcloud.html">Nextcloud</a>, Jellyfin, Open WebUI, or any
+                        other service I want to reach from outside. NPM handles the TLS
+                        termination with Let's Encrypt certificates, so each site gets a
+                        valid HTTPS connection and I only manage renewals in one place.
+                    </p>
+                    <p>
+                        The tricky part is getting public traffic to NPM without opening
+                        ports on my home router. That is where Oracle Cloud comes in. I have
+                        a constantly running instance sitting in a Virtual Cloud Network (VNC) with
+                        security rules that only allow the ports I actually need — 80, 443,
+                        and 25565 for Minecraft. A persistent tunnel carries the traffic from
+                        that Oracle Cloud instance straight into my home network and straight
+                        into NPM. From the public internet's perspective the only exposed
+                        endpoint is the Oracle Cloud IP behind the VNC security rules; my
+                        home router has zero port forwards and nothing open.
+                    </p>
+                    <p>
+                        Cloudflare manages my domain's DNS. I have A records for each
+                        subdomain — <code>nextcloud.example.com</code>,
+                        <code>amp.example.com</code>, <code>play.example.com</code>, and so
+                        on — all pointing at the Oracle Cloud public IP. When a request
+                        arrives, NPM reads the subdomain from the <code>Host</code> header
+                        and uses that to decide which internal service to hand it off to.
+                        The best part about all three of these services is they all function
+                        on a free plan or just don't have any costs associated with them.
+                    </p>
+                    <p>
+                        In simpler terms, it is the front door to my entire homelab. Cloudflare
+                        answers the DNS lookup, Oracle Cloud's VNC acts as the gatekeeper that
+                        decides which ports are even allowed through, NPM terminates the
+                        certificate and routes by subdomain, and the request lands on the
+                        right service at home — all without a single port open on my own router.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature-row">
+                <div class="feature-text">
+                    <h2>What did I learn?</h2>
+                    <p>
+                        Setting this up taught me how a full public request chain works
+                        end to end: a browser asks Cloudflare for the subdomain's IP, the
+                        request hits the Oracle Cloud instance, the VNC security rules
+                        decide whether the port is even allowed, the tunnel carries it back
+                        to my home network, and NPM reads the <code>Host</code> header to
+                        route it to the right backend. Understanding each of those layers
+                        separately is one thing, but watching connection logs and seeing
+                        different international IPs pinging me at least once per second
+                        is another. After seeing those attempts I decided to set up essentially
+                        a whitelist that only allows US IPs, as well as temporarily blacklisting
+                        IPs that repeatedly attempt to connect.
+                    </p>
+                    <p>
+                        I got comfortable writing and reading Nginx config —
+                        <code>server</code> blocks, <code>location</code> directives,
+                        <code>proxy_pass</code>, and the proxy headers
+                        (<code>X-Forwarded-For</code>, <code>X-Forwarded-Proto</code>,
+                        <code>Host</code>) that make backends like <a href="amp.html">AMP</a> and <a href="nextcloud.html">Nextcloud</a> see
+                        the real client IP and know the original request was HTTPS.
+                        I also learned how Oracle Cloud's VNC and security lists work as a
+                        network-level firewall, and how to keep Cloudflare DNS A records in
+                        sync when I spin a new service up or tear one down. Managing
+                        Let's Encrypt certificates through NPM, reading Nginx access and
+                        error logs to trace a request through the chain, and keeping the
+                        tunnel alive across reboots all came from actually living with this
+                        setup day to day.
+                    </p>
+                </div>
+                <div class="feature-media">
+                  <iframe
+                    src="https://www.youtube.com/embed/FBARrpkP6Jc"
+                    title="Oracle Cloud and Nginx walkthrough"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    allowfullscreen>
+                  </iframe>
+                  <p>Video Demonstrating Roughly What I Did</p>
+                  <p>(I really WISH I knew about this when I was setting it up)</p>
+                </div>
+            </div>
+
+            <p><a href="https://proxyon.io/blog/nginx-proxy-manager" target="_blank" rel="noopener">Read more about Nginx Proxy Manager</a></p>
+            <p><a href="https://nginxproxymanager.com/" target="_blank" rel="noopener">Check out Nginx Proxy Manager!</a></p>
+            <p><a href="https://www.oracle.com/cloud/" target="_blank" rel="noopener">Oracle's Cloud Website</a></p>
+            <p><a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Start your free Cloudflare plan!</a></p>
+
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <p>
+            Email me!: <a href="mailto:esmit131@asu.edu">esmit131@asu.edu</a>
+            &nbsp;|&nbsp;
+            Inquiries?
+            &nbsp;|&nbsp;
+            Eli Smith &copy; 2026
+        </p>
+    </div>
+
+</body>
+</html>
