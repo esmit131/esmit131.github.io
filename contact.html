@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Eli's Projects - Contact</title>
+    <meta name="description" content="Form to leave inquiries for Eli">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h2 {
+            text-align: center;
+        }
+        .contact-form {
+            max-width: 640px;
+            width: 100%;
+            background: #424245;
+            border-radius: 10px;
+            padding: 32px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        .contact-form h2 {
+            font-size: 26px;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #fdfdff;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            background: #363637;
+            color: #fdfdff;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1375cb;
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .form-group .optional {
+            font-weight: normal;
+            font-size: 13px;
+            color: #aaa;
+        }
+        .form-group .hint {
+            display: block;
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 4px;
+        }
+        .form-submit {
+            display: inline-block;
+            padding: 12px 28px;
+            background: #1375cb;
+            color: #fdfdff;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background .15s ease;
+        }
+        .form-submit:hover {
+            background: #008eb5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html">
+            <img src="images/eli_logo.png" alt="Eli's Projects Logo">
+            <h1>Eli's Projects</h1>
+        </a>
+    </div>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="nav-label">Projects</li>
+                <li><a href="proxmox.html">Proxmox</a></li>
+                <li><a href="nextcloud.html">Nextcloud</a></li>
+                <li><a href="amp.html">AMP</a></li>
+                <li><a href="nginx.html">Nginx</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+
+            <h2>Get In Touch With Me!</h2>
+            <p>
+                Whether you have a question about one of my projects, want to talk
+                about a role, or just want to share what you think about the site,
+                drop a message below. I'll get back to you as soon as I can. Leaving
+                an inquiry here doesn't clog up my inbox and gives me a better chance
+                to see your message!
+            </p>
+
+            <form class="contact-form" action="#" method="post">
+
+                <div class="form-group">
+                    <label for="Fname">First Name</label>
+                    <input type="text" id="Fname" name="Fname" required
+                           placeholder="Your first name">
+                </div>
+
+                <div class="form-group">
+                    <label for="Lname">Last Name</label>
+                    <input type="text" id="Lname" name="Lname" required
+                           placeholder="Your last name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required
+                           placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone number <span class="optional">(optional)</span></label>
+                    <input type="tel" id="phone" name="phone"
+                           placeholder="(555) 123-4567">
+                </div>
+
+                <div class="form-group">
+                    <label for="who">Who are you?</label>
+                    <input type="text" id="who" name="who" required
+                           placeholder="e.g. hobbyist, employer at XYZ, fellow student">
+                    <span class="hint">A quick description helps me figure out the best way to follow up.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your inquiry</label>
+                    <textarea id="message" name="message" required
+                              placeholder="What's on your mind? Questions about a project, a role, or anything else."></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">Send inquiry</button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        Email me!: <a href="mailto:esmit131@asu.edu">esmit131@asu.edu</a>
+        &nbsp;|&nbsp;
+        Eli Smith &copy; 2026
+    </div>
+
+</body>
+</html>

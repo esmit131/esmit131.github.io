@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eli's Projects - Home</title>
+    <meta name="description" content="University course project site displaying Eli's personal projects.">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
@@ -91,16 +94,17 @@
                 <tr>
                   <th>Component</th>
                   <th>Specification</th>
+                  <th>Purpose</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td>CPU</td>            <td>Intel Core i7-14700f</td></tr>
-                <tr><td>RAM</td>            <td>64 GB DDR5 6000 MHz</td></tr>
-                <tr><td>Storage</td>        <td>2 TB Samsung 990 EVO Plus NVMe SSD <br><br> 12 TB Western Digital HDD</td></tr>
-                <tr><td>GPU</td>            <td>NVIDIA RTX 3090</td></tr>
-                <tr><td>Power Supply</td>   <td>850W 80+ Gold</td></tr>
-                <tr><td>Network</td>        <td>1 GbE Ethernet (onboard)</td></tr>
-                <tr><td>Router</td>         <td>ASUS GT-AXE11000</td></tr>
+                <tr><td>CPU</td>            <td>Intel Core i7-14700f</td>                                                   <td>Enough clock speed and cores to handle all of the containers and VMs</td>               </tr>
+                <tr><td>RAM</td>            <td>64 GB DDR5 6000 MHz</td>                                                    <td>Sizeable and fast memory pool for all Proxmox guests</td>                               </tr>
+                <tr><td>Storage</td>        <td>2 TB Samsung 990 EVO Plus NVMe SSD <br><br> 12 TB Western Digital HDD</td>  <td>Fast I/O for Proxmox and VMs with bulk storage for media and miscellaneous storage</td> </tr>
+                <tr><td>GPU</td>            <td>NVIDIA RTX 3090</td>                                                        <td>Passthrough for media transcoding and running LLMs</td>                                 </tr>
+                <tr><td>Power Supply</td>   <td>850W 80+ Gold</td>                                                          <td>Stable and efficient power for the hardware</td>                                        </tr>
+                <tr><td>Network</td>        <td>1 GbE Ethernet (onboard)</td>                                               <td>Fast and stable network connection, my whole network only supports gigabit</td>         </tr>
+                <tr><td>Router</td>         <td>ASUS GT-AXE11000</td>                                                       <td>Quality WiFi 6e router that can also run custom firmware</td>                           </tr>
               </tbody>
             </table>
         </div>
@@ -108,13 +112,11 @@
     </div>
 
     <div class="footer">
-        <p>
             Email me!: <a href="mailto:esmit131@asu.edu">esmit131@asu.edu</a>
             &nbsp;|&nbsp;
             <a href="contact.html">Inquiries?</a>
             &nbsp;|&nbsp;
             Eli Smith &copy; 2026
-        </p>
     </div>
 
 </body>
